@@ -36,17 +36,20 @@ export class View {
 
   createRepository(repositoryData) {
     const repositoryElement = this.createElement("li", "repository");
-    repositoryElement.addEventListener("click", () => this.showUserData(repositoryData))
+    repositoryElement.addEventListener("click", () => {
+      this.showUserData(repositoryData);
+      this.searchList.textContent = " ";
+    });
     repositoryElement.textContent = `${repositoryData.name}`;
     this.searchList.append(repositoryElement);
   }
 
   showUserData(repositoryData) {
-    const user = this.createElement("div", "user")
+    const user = this.createElement("div", "user");
     const repositoryName = this.createElement("div", "repository-name");
     const userName = this.createElement("div", "user-name");
     const repositoryStars = this.createElement("div", "repository-stars");
-    const closeButton = this.createElement("button", "close")
+    const closeButton = this.createElement("button", "close");
     repositoryName.textContent = `Name: ${repositoryData.name}`;
     userName.textContent = `Owner: ${repositoryData.owner.login}`;
     repositoryStars.textContent = `Stars: ${repositoryData.stargazers_count}`;
@@ -54,11 +57,11 @@ export class View {
     user.append(userName);
     user.append(repositoryStars);
     user.append(closeButton);
-    this.repositoriesList.append(user)
+    this.repositoriesList.append(user);
     closeButton.addEventListener("click", (e) => {
       let delBtn = e.target.closest(".user");
-      delBtn.remove()
-    })
+      delBtn.remove();
+    });
   }
 
   setCounterMessage(message) {

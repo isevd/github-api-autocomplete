@@ -28,15 +28,12 @@ export class Search {
   }
 
   repoRequest(searchValue) {
-    let repositories;
-    let totalCount;
-    let message;
      this.api.searchRepositories(searchValue).then((res) => {
        if (res.ok) {
          res.json().then((res) => {
-           repositories = res.items;
-           totalCount = res.total_count;
-           message = this.log.counterMessage(totalCount)
+           let repositories = res.items;
+           const totalCount = res.total_count;
+           const message = this.log.counterMessage(totalCount)
            this.setReposCount(this.reposCount + res.items.length);
            this.view.setCounterMessage(message);
            repositories.forEach((repository) =>
