@@ -38,7 +38,9 @@ export class View {
     const repositoryElement = this.createElement("li", "repository");
     repositoryElement.addEventListener("click", () => {
       this.showUserData(repositoryData);
-      this.searchList.textContent = " ";
+      this.searchList.textContent = "";
+      this.searchInput.value = "";
+      this.searchCounter.textContent = "";
     });
     repositoryElement.textContent = `${repositoryData.name}`;
     this.searchList.append(repositoryElement);
