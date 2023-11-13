@@ -1,5 +1,4 @@
 export class Search {
-
   setReposCount(count) {
     this.reposCount = count;
   }
@@ -18,30 +17,30 @@ export class Search {
 
   searchRepositories() {
     const searchValue = this.view.searchInput.value;
-    this.view.setCounterMessage('');
+    this.view.setCounterMessage("");
     if (searchValue) {
-     this.clearRepositories();
-     this.repoRequest(searchValue);
+      this.clearRepositories();
+      this.repoRequest(searchValue);
     } else {
       this.clearRepositories();
     }
   }
 
   repoRequest(searchValue) {
-     this.api.searchRepositories(searchValue).then((res) => {
-       if (res.ok) {
-         res.json().then((res) => {
-           let repositories = res.items;
-           const totalCount = res.total_count;
-           const message = this.log.counterMessage(totalCount)
-           this.setReposCount(this.reposCount + res.items.length);
-           this.view.setCounterMessage(message);
-           repositories.forEach((repository) =>
-             this.view.createRepository(repository)
-           );
-         });
-       }
-     });
+    this.api.searchRepositories(searchValue).then((res) => {
+      if (res.ok) {
+        res.json().then((res) => {
+          let repositories = res.items;
+          const totalCount = res.total_count;
+          const message = this.log.counterMessage(totalCount);
+          this.setReposCount(this.reposCount + res.items.length);
+          this.view.setCounterMessage(message);
+          repositories.forEach((repository) =>
+            this.view.createRepository(repository)
+          );
+        });
+      }
+    });
   }
 
   clearRepositories() {
