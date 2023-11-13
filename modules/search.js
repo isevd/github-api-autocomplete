@@ -26,8 +26,8 @@ export class Search {
     }
   }
 
-  repoRequest() {
-    this.api.searchRepositories().then((res) => {
+  repoRequest(searchValue) {
+    this.api.searchRepositories(searchValue).then((res) => {
       if (res.ok) {
         res.json().then((res) => {
           let repositories = res.items;
