@@ -9,14 +9,14 @@ export class Search {
     this.log = log;
 
     this.view.searchInput.addEventListener(
-      "keyup",
+      "input",
       this.debounce(this.searchRepositories.bind(this), 500)
     );
     this.reposCount = 0;
   }
 
-  searchRepositories() {
-    const searchValue = this.view.searchInput.value;
+  searchRepositories(event) {;
+    const searchValue = event.target.value;
     this.view.setCounterMessage("");
     if (searchValue) {
       this.clearRepositories();
@@ -26,8 +26,8 @@ export class Search {
     }
   }
 
-  repoRequest(searchValue) {
-    this.api.searchRepositories(searchValue).then((res) => {
+  repoRequest() {
+    this.api.searchRepositories().then((res) => {
       if (res.ok) {
         res.json().then((res) => {
           let repositories = res.items;
